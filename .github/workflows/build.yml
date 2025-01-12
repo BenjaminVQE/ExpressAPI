@@ -35,7 +35,7 @@ jobs:
         run: docker build -t $REGISTRY_NAME/expressapi .
 
       - name: Log in to Docker Registry
-        run: echo $REGISTRY_PASSWORD | docker login $REGISTRY_IP -u $REGISTRY_USERNAME --password-stdin
+        run: echo $REGISTRY_PASSWORD | docker login --insecure-registry $REGISTRY_IP -u $REGISTRY_USERNAME --password-stdin
 
       - name: Push Docker Image
         run: docker push $REGISTRY_NAME/expressapi
