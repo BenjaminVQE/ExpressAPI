@@ -24,10 +24,10 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker Image
-        run: docker build -t $REGISTRY_NAME/expressAPI .
+        run: docker build -t $REGISTRY_NAME/expressapi .
 
       - name: Log in to Docker Registry
         run: echo $REGISTRY_PASSWORD | docker login $REGISTRY_IP -u $REGISTRY_USERNAME --password-stdin
 
       - name: Push Docker Image
-        run: docker push $REGISTRY_NAME/expressAPI
+        run: docker push $REGISTRY_NAME/expressapi
