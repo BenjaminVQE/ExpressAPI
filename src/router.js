@@ -95,6 +95,9 @@ router.post("/users", async (req, res) => {
 // -----METHOD DELETE-----
 router.delete("/users/:id", async (req, res) => {
   try {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+
     if (!user) {
       return res.status(404).json({
         message: "Utilisateur non trouvé",
@@ -103,7 +106,7 @@ router.delete("/users/:id", async (req, res) => {
 
     User.destroy({
       where: {
-        id: "",
+        id: id,
       },
     });
     res.status(201).json({
