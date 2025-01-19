@@ -2,18 +2,22 @@ FROM node:22 AS base
 
 WORKDIR /app
 
-RUN npm init -y
+COPY package*.json ./
 
-# Installer nodemon globalement
-RUN npm install -g nodemon
-
-RUN npm install express
+RUN npm install
 
 COPY . .
 
 EXPOSE 3000
 
 FROM base AS dev
+
+# Démarrer l'application avec nodemon
+CMD ["npm", "run", "dev"]
+
+FROM base AS prod
+
+RUN npm install --production
 
 # Démarrer l'application avec nodemon
 CMD ["npm", "run", "start"]
