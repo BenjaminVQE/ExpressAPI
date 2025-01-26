@@ -29,7 +29,7 @@ router.get("/", function (req, res) {
 router.get("/users/:id", async (req, res) => {
   try {
     const { id } = req.params; // Récupérer l'ID de l'utilisateur depuis les paramètres de l'URL
-    const user = await User.findByPk(id); // Trouver l'utilisateur par son ID (findByPk est utilisé pour chercher un enregistrement par sa clé primaire)
+    const user = await User.findByPk(id); // Trouver l'utilisateur par son ID
 
     if (!user) {
       return res.status(404).json({
@@ -45,6 +45,7 @@ router.get("/users/:id", async (req, res) => {
     });
   }
 });
+
 // -----METHOD POST-----
 router.post("/users", async (req, res) => {
   try {
