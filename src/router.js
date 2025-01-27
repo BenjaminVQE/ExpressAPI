@@ -26,6 +26,10 @@ router.get("/", function (req, res) {
   res.render("index", { title: "Accueil" });
 });
 
+router.get("/chat", function (req, res) {
+  res.render("chat", { title: "Chat" });
+});
+
 router.use("/users", usersRouter);
 router.use("/products", productsRouter);
 
