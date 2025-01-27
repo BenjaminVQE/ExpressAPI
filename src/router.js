@@ -29,7 +29,9 @@ router.get("/", function (req, res) {
 router.get("/users/:id", async (req, res) => {
   try {
     const { id } = req.params; // Récupérer l'ID de l'utilisateur depuis les paramètres de l'URL
-    const user = await User.findByPk(id); // Trouver l'utilisateur par son ID
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ["password"] },
+    }); // Trouver l'utilisateur par son ID
 
     if (!user) {
       return res.status(404).json({
@@ -89,6 +91,29 @@ router.post("/users", async (req, res) => {
     res.status(500).json({
       message: "Erreur lors de la création de l'utilisateur",
       error: error.message || error,
+    });
+  }
+});
+
+// -----METHOD PUT-----
+router.put("/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    let user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Utilisateur non trouvé",
+      });
+    }
+
+    await user.update(req.body);
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: "Erreur lors de la récupération des utilisateurs",
+      error,
     });
   }
 });
