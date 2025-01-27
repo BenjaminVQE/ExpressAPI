@@ -48,6 +48,26 @@ router.get("/users/:id", async (req, res) => {
   }
 });
 
+router.get("/users/role/:role", async (req, res) => {
+  try {
+    const { role } = req.params;
+    const user = await User.findOne({ where: { role: role } });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Utilisateurs non trouvés",
+      });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: "Erreur lors de la récupération des utilisateurs",
+      error,
+    });
+  }
+});
+
 // -----METHOD POST-----
 router.post("/users", async (req, res) => {
   try {
