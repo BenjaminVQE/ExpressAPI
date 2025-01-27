@@ -86,7 +86,6 @@ router.post("/", async (req, res) => {
       user: newUser,
     });
   } catch (error) {
-    console.error("Erreur lors de la création de l'utilisateur:", error);
     res.status(500).json({
       message: "Erreur lors de la création de l'utilisateur",
       error: error.message || error,
@@ -138,7 +137,6 @@ router.delete("/:id", async (req, res) => {
       message: "Utilisateur supprimé avec succès",
     });
   } catch (error) {
-    console.error("Erreur lors de la suppression de l'utilisateur", error);
     res.status(500).json({
       message: "Erreur lors de la suppression de l'utilisateur",
       error: error.message || error,
