@@ -1,5 +1,6 @@
 DOCKER_COMPOSE = docker-compose
-SERVICE_NAME = expressapi
+PACKAGE ?=
+CONTAINER = serve
 
 .PHONY: help dev prod logs down clean rebuild
 
@@ -29,3 +30,7 @@ down:
 remove-image:
 	@echo "Arrêt des conteneurs et suppression de l'image..."
 	$(DOCKER_COMPOSE) down --rmi all
+
+p-install-dev:
+	@echo "Téléchargement du package $(PACKAGE)"
+	docker container exec -it serverexpress-app-dev-1 npm install $(PACKAGE)
