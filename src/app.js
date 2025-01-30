@@ -1,13 +1,17 @@
 import express from "express";
 import router from "./router.js";
+import http from "http";
 import ejsLayouts from "express-ejs-layouts";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import sequelize from "./config/database.js";
+import { Server } from "socket.io";
 
 dotenv.config();
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -39,12 +43,29 @@ sequelize
     );
   });
 
+io.on("connection", (socket) => {
+  console.log("Un utilisateur est connecté");
+
+  // Recevoir un message depuis le client
+  socket.on("message", (data) => {
+    console.log("Message reçu:", data);
+
+    // Diffuser le message à tous les clients connectés
+    io.emit("message", data);
+  });
+
+  // Gestion de la déconnexion
+  socket.on("disconnect", () => {
+    console.log("Un utilisateur s'est déconnecté");
+  });
+});
+
 app.use((req, res) => {
   res
     .status(404)
     .send("Erreur 404 Désolé, la page que vous recherchez n'existe pas.");
 });
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log(`Le serveur est lancé sur http://localhost:${process.env.PORT}`);
 });
