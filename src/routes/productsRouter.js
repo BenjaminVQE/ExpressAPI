@@ -62,7 +62,6 @@ router.post("/", async (req, res) => {
       description,
       price,
     });
-    console.log(newProduct);
 
     res.status(201).json({
       message: "Produit créé avec succès",
