@@ -10,7 +10,7 @@ import dab from "./services/dab.js";
 import { Server } from "socket.io";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
-import swaggerOptions from "./swaggerOptions.js";
+import swaggerOptions from "./config/swaggerOptions.js";
 
 dotenv.config();
 const app = express();
