@@ -1,0 +1,17 @@
+#messages {
+    width: 100%;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+#messages p {
+    text-align: end;
+    padding: 0 10px;
+}
+
+#chatBox {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

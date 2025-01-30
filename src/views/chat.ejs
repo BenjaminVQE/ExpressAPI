@@ -1,1 +1,48 @@
-<h1>Bienvenue sur la page de tchat !</h1>
+<div id="chatBox">
+  <h1>Chat box</h1>
+  <div id="messages"></div>
+  <div>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="message"
+        placeholder="Tapez votre message..."
+        onkeydown="checkEnter(event)"
+      />
+      <button type="button" class="btn btn-primary" onclick="sendMessage()">
+        Envoyer
+      </button>
+    </div>
+  </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  socket.on("connect", function () {
+    console.log("Connecté au serveur Socket.io");
+  });
+
+  // Envoyer un message
+  function sendMessage() {
+    const message = document.getElementById("message").value;
+    socket.emit("message", message);
+    document.getElementById("message").value = ""; // Effacer la boîte de texte
+  }
+
+  // Recevoir un message et l'afficher
+  socket.on("message", function (data) {
+    const messages = document.getElementById("messages");
+    const newMessage = document.createElement("p");
+    newMessage.textContent = data;
+    messages.appendChild(newMessage);
+  });
+
+  function checkEnter(event) {
+    if (event.key === "Enter") {
+      sendMessage(); // Appeler la fonction pour envoyer le message
+      event.preventDefault(); // Empêcher le comportement par défaut de la touche 'Enter' (ex. validation de formulaire)
+    }
+  }
+</script>
