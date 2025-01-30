@@ -21,6 +21,7 @@ router.use(function timeLog(req, res, next) {
   );
   next();
 });
+
 // -----METHOD GET-----
 router.get("/", function (req, res) {
   res.render("index", { title: "Accueil" });

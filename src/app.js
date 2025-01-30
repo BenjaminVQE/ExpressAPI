@@ -8,6 +8,9 @@ import dotenv from "dotenv";
 import sequelize from "./config/database.js";
 import dab from "./services/dab.js";
 import { Server } from "socket.io";
+import swaggerUi from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerOptions from "./swaggerOptions.js";
 
 dotenv.config();
 const app = express();
@@ -15,6 +18,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -24,6 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", router);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 try {
   await sequelize.authenticate();
