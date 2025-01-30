@@ -1,6 +1,7 @@
 import { Router } from "express";
 import usersRouter from "./routes/usersRouter.js";
 import productsRouter from "./routes/productsRouter.js";
+import authRouter from "./routes/authRouter.js";
 
 const router = Router();
 
@@ -31,6 +32,7 @@ router.get("/chat", function (req, res) {
   res.render("chat", { title: "Chat" });
 });
 
+router.use("/login", authRouter);
 router.use("/users", usersRouter);
 router.use("/products", productsRouter);
 

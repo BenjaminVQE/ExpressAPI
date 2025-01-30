@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import verifyToken from "../services/verifyToken.js";
 
 const router = Router();
 
@@ -74,8 +75,9 @@ const router = Router();
  *                      type: string
  *                      example: "Erreur lors de la récupération des utilisateurs"
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", verifyToken, async (req, res) => {
   try {
+    const userId = req.user.id;
     const { id } = req.params; // Récupérer l'ID de l'utilisateur depuis les paramètres de l'URL
     const user = await User.findByPk(id, {
       attributes: { exclude: ["password"] },
@@ -411,7 +413,7 @@ router.put("/:id", async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({
-      message: "Erreur lors de la récupération des utilisateurs",
+      message: "Erreur lors de la mise à jour de l'utilisateur",
       error,
     });
   }
