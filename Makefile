@@ -6,10 +6,11 @@ CONTAINER = serve
 
 help:
 	@echo "Commandes disponibles :"
-	@echo "  make dev      - Démarrer l'environnement de développement"
-	@echo "  make prod     - Démarrer l'environnement de production"
-	@echo "  make logs     - Afficher les logs des conteneurs"
-	@echo "  make down     - Arrêter les conteneurs et supprimer les conteneurs"
+	@echo "  make dev      		- Démarrer l'environnement de développement"
+	@echo "  make prod     		- Démarrer l'environnement de production"
+	@echo "  make logs     		- Afficher les logs des conteneurs"
+	@echo "  make down    			- Arrêter les conteneurs et supprimer les conteneurs"
+	@echo "  make p-install		- Installer un package npm, en spécifiant PACKAGE="
 
 dev:
 	@echo "Démarrage de l'environnement de développement..."
@@ -31,6 +32,6 @@ remove-image:
 	@echo "Arrêt des conteneurs et suppression de l'image..."
 	$(DOCKER_COMPOSE) down --rmi all
 
-p-install-dev:
+p-install:
 	@echo "Téléchargement du package $(PACKAGE)"
 	docker container exec -it serverexpress-app-dev-1 npm install $(PACKAGE)
