@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import sequelize from "./config/database.js";
+import dab from "./services/dab.js";
 import { Server } from "socket.io";
 
 dotenv.config();
@@ -48,10 +49,28 @@ io.on("connection", (socket) => {
 
   // Recevoir un message depuis le client
   socket.on("message", (data) => {
-    console.log("Message reçu:", data);
-
-    // Diffuser le message à tous les clients connectés
-    io.emit("message", data);
+    if (data.startsWith("/dab")) {
+      const regex = /\/dab\s+(\d+(\.\d+)?)/;
+      const match = data.match(regex);
+      if (match) {
+        const montant = match[1];
+        const resultat = dab(montant);
+        let message = `Répartition du montant pour ${montant} : `;
+        resultat.forEach((item) => {
+          message += `${item.count} x ${item.value}€, `;
+        });
+        message = message.slice(0, -2);
+        socket.emit("message", message);
+      } else {
+        socket.emit(
+          "message",
+          "Veuillez spécifier un montant valide après /dab."
+        );
+      }
+    } else {
+      // Diffuser le message à tous les clients connectés
+      io.emit("message", data);
+    }
   });
 
   // Gestion de la déconnexion
