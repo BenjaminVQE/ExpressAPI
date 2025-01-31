@@ -1,8 +1,13 @@
-import login from "../controller/authController.js";
+import authController from "../controller/authController.js";
 import { Router } from "express";
 
 const router = Router();
+// -----METHOD GET-----
+router.get("/login", function (req, res) {
+  res.render("login", { title: "Connexion" });
+});
 
+// -----METHOD POST-----
 /**
  * @swagger
  * /login:
@@ -72,6 +77,6 @@ const router = Router();
  *                   type: string
  *                   example: "Erreur serveur"
  */
-router.post("/", login);
+router.post("/", authController.login);
 
 export default router;

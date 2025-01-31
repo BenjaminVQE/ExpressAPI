@@ -32,7 +32,7 @@ router.get("/chat", function (req, res) {
   res.render("chat", { title: "Chat" });
 });
 
-router.use("/login", authRouter);
+router.use("/auth", authRouter);
 router.use("/users", usersRouter);
 router.use("/products", productsRouter);
 

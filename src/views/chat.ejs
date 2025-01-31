@@ -27,15 +27,20 @@
   // Envoyer un message
   function sendMessage() {
     const message = document.getElementById("message").value;
-    socket.emit("message", message);
-    document.getElementById("message").value = ""; // Effacer la boîte de texte
+    const userName = sessionStorage.getItem("userName");
+    if (userName && message) {
+      socket.emit("message", { userName, message });
+      document.getElementById("message").value = ""; // Effacer la boîte de texte
+    } else {
+      alert("Nom d'utilisateur ou message manquant");
+    }
   }
 
   // Recevoir un message et l'afficher
   socket.on("message", function (data) {
     const messages = document.getElementById("messages");
     const newMessage = document.createElement("p");
-    newMessage.textContent = data;
+    newMessage.textContent = `${data.userName}: ${data.message}`;
     messages.appendChild(newMessage);
   });
 

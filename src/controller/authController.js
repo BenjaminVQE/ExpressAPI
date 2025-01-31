@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const login = async (req, res) => {
+export async function login(req, res) {
   const { email, password } = req.body;
 
   try {
@@ -34,10 +34,13 @@ const login = async (req, res) => {
     res.status(200).json({
       message: "Connexion réussie",
       token: token,
+      requestByUser: user.firstName,
     });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur", error: error.message });
   }
-};
+}
 
-export default login;
+export default {
+  login,
+};

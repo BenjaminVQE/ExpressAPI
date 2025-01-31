@@ -34,7 +34,7 @@
                 >Accueil</a
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="chat-link" style="display: none;">
               <a class="nav-link active" aria-current="page" href="/chat"
                 >Chat</a
               >
@@ -43,6 +43,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/api-docs"
               >Docs</a
+            >
+          </li>
+          <li class="nav-item" id="login-link">
+            <a class="nav-link active" aria-current="page" href="/auth/login"
+              >Se connecter</a
             >
           </li>
           </ul>
@@ -55,5 +60,35 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Vérifie si le token est présent dans le sessionStorage
+        const token = sessionStorage.getItem('authToken');
+    
+        if (token) {
+          const loginLink = document.getElementById('login-link');
+          const chatLink = document.getElementById('chat-link')
+          if (loginLink) {
+            loginLink.style.display = 'none'; 
+          }
+    
+          if(chatLink) {
+            chatLink.style.display = '';
+          }
+
+          const logoutLink = document.createElement('li');
+          logoutLink.classList.add('nav-item');
+          logoutLink.innerHTML = '<a class="nav-link active" href="/logout">Se déconnecter</a>';
+          document.querySelector('.navbar-nav').appendChild(logoutLink);
+          
+          logoutLink.querySelector('a').addEventListener('click', function(event) {
+            event.preventDefault();
+            sessionStorage.removeItem('authToken'); 
+            sessionStorage.removeItem('userName'); 
+            location.reload(); 
+          });
+        }
+      });
+    </script>
   </body>
 </html>

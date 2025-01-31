@@ -55,7 +55,9 @@ io.on("connection", (socket) => {
 
   // Recevoir un message depuis le client
   socket.on("message", (data) => {
-    if (data.startsWith("/dab")) {
+    const userName = data.userName || "Anonyme";
+
+    if (data.message.startsWith("/dab")) {
       const regex = /\/dab\s+(\d+(\.\d+)?)/;
       const match = data.match(regex);
       if (match) {
@@ -66,16 +68,16 @@ io.on("connection", (socket) => {
           message += `${item.count} x ${item.value}€, `;
         });
         message = message.slice(0, -2);
-        socket.emit("message", message);
+        socket.emit("message", { userName, message });
       } else {
-        socket.emit(
-          "message",
-          "Veuillez spécifier un montant valide après /dab."
-        );
+        socket.emit("message", {
+          userName,
+          message: "Veuillez spécifier un montant valide après /dab.",
+        });
       }
     } else {
       // Diffuser le message à tous les clients connectés
-      io.emit("message", data);
+      io.emit("message", { userName, message: data.message });
     }
   });
 
