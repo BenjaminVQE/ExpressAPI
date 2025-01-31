@@ -20,6 +20,15 @@ const swaggerOptions = {
         url: `http://localhost:${process.env.PORT}`, // L'URL de l'API
       },
     ],
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
   },
   apis: ["./src/routes/*.js"],
 };
