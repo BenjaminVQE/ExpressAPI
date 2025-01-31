@@ -62,6 +62,7 @@ Utilisation de Sequelize
 Voir config/database.js
 
 ## POSTMAN + Collection + JWT/Token
+API REST
 
 ## Mise en production
 Application sous Docker (Voir étape installation Prod)
