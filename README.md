@@ -9,24 +9,44 @@
 ## Architecture
 
 / (racine du projet)
+
 │
+
 ├── src/
+
 │   ├── config/
+
 │   ├── controller/
+
 │   ├── models/
+
 │   ├── public/
+
 │   ├── routes/
+
 │   ├── services/
+
 │   └── views/
+
 │
+
 ├── app.js
+
 ├── router.js
+
 ├── Makefile
+
 ├── .env
+
 ├── compose.yaml
+
+
 ├── Dockerfile
+
 ├── eslint.config.js
+
 ├── package-lock.json
+
 └── package.json
 
 ## Présentation du site
