@@ -10,7 +10,7 @@ router.get("/login", function (req, res) {
 // -----METHOD POST-----
 /**
  * @swagger
- * /login:
+ * /auth:
  *   post:
  *     summary: Connexion d'un utilisateur
  *     description: Permet de connecter un utilisateur en échangeant l'email et le mot de passe contre un JWT
