@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
 
     if (data.message.startsWith("/dab")) {
       const regex = /\/dab\s+(\d+(\.\d+)?)/;
-      const match = data.match(regex);
+      const match = data.message.match(regex);
       if (match) {
         const montant = match[1];
         const resultat = dab(montant);
