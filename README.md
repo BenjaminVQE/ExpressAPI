@@ -20,23 +20,23 @@
 
 ├── src/
 
-│   ├── config/
+│ ── ├── config/
 
-│   ├── controller/
+│ ── ├── controller/
 
-│   ├── models/
+│ ── ├── models/
 
-│   ├── public/
+│ ── ├── public/
 
-│   ├── routes/
+│ ── ├── routes/
 
-│   ├── services/
+│ ── ├── services/
 
-│   ├── views/
+│ ── ├── views/
 
-│   ├──  app.js
+│ ── ├──  app.js
 
-│   └── router.js
+│ ── └── router.js
 
 ├── Makefile
 
