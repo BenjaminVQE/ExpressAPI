@@ -59,7 +59,7 @@
 Utilisation de Sequelize
 
 ## Connexion BDD
-Voir POSTMAN
+Voir config/database.js
 
 ## POSTMAN + Collection + JWT/Token
 
