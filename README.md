@@ -7,23 +7,27 @@
 - Lancer la commande "make dev" pour l'environnement DEV et "make prod" pour l'environnement PRODUCTION, dans le répertoire racine de l'application
 
 ## Architecture
-src
-  |  config
-  |  controller
-  |  models
-  |  public
-  |  routes
-  |  services
-  |  views
-  |  app.js
-  |  router.js
-Makefile
-.env
-compose.yaml
-Dockerfile
-eslint.config.js
-package-lock.json
-package.json
+
+/ (racine du projet)
+│
+├── src/
+│   ├── config/
+│   ├── controller/
+│   ├── models/
+│   ├── public/
+│   ├── routes/
+│   ├── services/
+│   └── views/
+│
+├── app.js
+├── router.js
+├── Makefile
+├── .env
+├── compose.yaml
+├── Dockerfile
+├── eslint.config.js
+├── package-lock.json
+└── package.json
 
 ## Présentation du site
 - Page d'accueil 
