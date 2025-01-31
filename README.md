@@ -26,13 +26,11 @@
 
 │   ├── services/
 
-│   └── views/
+│   ├── views/
 
-│
+│   ├──  app.js
 
-├── app.js
-
-├── router.js
+│   └── router.js
 
 ├── Makefile
 
