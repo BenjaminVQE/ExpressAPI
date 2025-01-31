@@ -6,6 +6,12 @@
 - Cloner le répo
 - Lancer la commande "make dev" pour l'environnement DEV et "make prod" pour l'environnement PRODUCTION, dans le répertoire racine de l'application
 
+## Présentation du site
+- Page d'accueil 
+- Page de connexion
+- Page de chat + commande "/dab"
+- Page documentation (Swagger)
+
 ## Architecture
 
 / (racine du projet)
@@ -46,12 +52,6 @@
 ├── package-lock.json
 
 └── package.json
-
-## Présentation du site
-- Page d'accueil 
-- Page de connexion
-- Page de chat + commande "/dab"
-- Page documentation (Swagger)
 
 ## ORM 
 Utilisation de Sequelize
